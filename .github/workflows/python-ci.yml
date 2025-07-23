@@ -1,0 +1,35 @@
+name: Python CI
+
+on:
+  push:
+    branches: ["**"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1) Récupération du code
+      - name: Checkout
+        uses: actions/checkout@v4
+
+
+      - name: Configure Git identity
+        run: |
+          git config --global user.name  "CI Bot"
+          git config --global user.email "ci@example.com
+
+    # 2) Installation de Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11.0"
+
+      - name: 📦 Installer les dépendances
+        run: |
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+
+    # 5) Lancer les tests
+      - name: Run pytest
+        run: pytest
