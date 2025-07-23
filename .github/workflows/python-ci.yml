@@ -28,3 +28,12 @@ jobs:
       run: |
         export PYTHONPATH="${PYTHONPATH}:$(pwd)"
         pytest
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - name: 🔁 Déploiement simulé
+      run: echo "🚀 Le code a été déployé automatiquement !"
